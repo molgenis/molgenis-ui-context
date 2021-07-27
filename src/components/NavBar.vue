@@ -133,7 +133,7 @@ export default {
       } else {
         const actualNavHeight = this.$refs.mgNavBarNav.clientHeight
         const heightBreakPoint = this.expectedNavHeight + this.wrapMargin
-        if (actualNavHeight > heightBreakPoint) {
+        if (actualNavHeight > heightBreakPoint || actualNavHeight === 0) {
           this.dynamicHamburgerBreakpoint = this.getClientWidth()
           this.showHamburger = true
         }
