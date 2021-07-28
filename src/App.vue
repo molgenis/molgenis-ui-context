@@ -25,7 +25,6 @@ export default Vue.extend({
   components: { PageComponent },
   methods: {
     handleContextLoaded (context) {
-      console.log(context)
     }
   }
 })

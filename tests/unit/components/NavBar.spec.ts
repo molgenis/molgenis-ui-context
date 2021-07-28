@@ -76,12 +76,12 @@ describe('NavBar.vue', () => {
       // @ts-ignore
       wrapper.vm.handleResize()
       // @ts-ignore
-      expect(wrapper.vm.showHamburger).toBe(false)
+      expect(wrapper.vm.showHamburger).toBe(true)
     })
   })
 
   describe('Hamburger is not shown, actual nav height is not bigger then the expected height', () => {
-    it('should keep not showing the hamburger', () => {
+    it('should keep showing the hamburger', () => {
       const wrapper = shallowMount(NavBar, {
         propsData: { molgenisMenu },
         data: () => {
@@ -99,7 +99,7 @@ describe('NavBar.vue', () => {
       // @ts-ignore
       wrapper.vm.handleResize()
       // @ts-ignore
-      expect(wrapper.vm.showHamburger).toBe(false)
+      expect(wrapper.vm.showHamburger).toBe(true)
     })
   })
 
