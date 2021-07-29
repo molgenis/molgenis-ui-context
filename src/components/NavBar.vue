@@ -133,6 +133,10 @@ export default {
       } else {
         const actualNavHeight = this.$refs.mgNavBarNav.clientHeight
         const heightBreakPoint = this.expectedNavHeight + this.wrapMargin
+        console.log('actualNavHeight', actualNavHeight)
+        console.log('heightBreakPoint', heightBreakPoint)
+        console.log('expectedNavHeight', this.expectedNavHeight)
+        console.log('wrapMargin', this.wrapMargin)
         if (actualNavHeight > heightBreakPoint || actualNavHeight === 0) { // Note: on mobile, if the menu is closed 'actualNavHeight' is 0, So we do have a showHamburger situation
           this.dynamicHamburgerBreakpoint = this.getClientWidth()
           this.showHamburger = true

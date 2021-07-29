@@ -54,7 +54,7 @@ describe('NavBar.vue', () => {
     })
   })
 
-  describe('Hamburger is shown, actual nav height is bigger then the expected height', () => {
+  describe('Hamburger is shown, if menu get a second row', () => {
     it('should show the hamburger', () => {
       const wrapper = shallowMount(NavBar, {
         propsData: { molgenisMenu },
@@ -63,16 +63,18 @@ describe('NavBar.vue', () => {
             selectedLanguage: 'en',
             languages: ['en'],
             helperStyle: undefined,
-            expectedNavHeight: 45,
             showHamburger: false,
-            wrapMargin: 0,
             dynamicHamburgerBreakpoint: 5000
           }
         }
       })
 
+      // Unit test does not use an actual dom, so calculating getPixelValue does not work in mounted
+      wrapper.vm.$data.expectedNavHeight = 45; // height for a single row
+      wrapper.vm.$data.wrapMargin = 0;
+
       // @ts-ignore
-      wrapper.vm.expectedNavHeight = -1 // calculated height is 0 so use -1 here to trigger if branch
+      wrapper.vm.$refs.mgNavBarNav = { clientHeight: 100 }
       // @ts-ignore
       wrapper.vm.handleResize()
       // @ts-ignore
@@ -80,8 +82,8 @@ describe('NavBar.vue', () => {
     })
   })
 
-  describe('Hamburger is not shown, actual nav height is not bigger then the expected height', () => {
-    it('should keep showing the hamburger', () => {
+  describe('Hamburger is not shown, items fit inside a single row', () => {
+    it('should not show the hamburger', () => {
       const wrapper = shallowMount(NavBar, {
         propsData: { molgenisMenu },
         data: () => {
@@ -89,17 +91,22 @@ describe('NavBar.vue', () => {
             selectedLanguage: 'en',
             languages: ['en'],
             helperStyle: undefined,
-            expectedNavHeight: 0,
             showHamburger: false,
             dynamicHamburgerBreakpoint: 5000
           }
         }
       })
 
+      // Unit test does not use an actual dom, so calculating getPixelValue does not work in mounted
+      wrapper.vm.$data.expectedNavHeight = 45; // height for a single row
+      wrapper.vm.$data.wrapMargin = 0;
+
+      // @ts-ignore
+      wrapper.vm.$refs.mgNavBarNav = { clientHeight: 45 }
       // @ts-ignore
       wrapper.vm.handleResize()
       // @ts-ignore
-      expect(wrapper.vm.showHamburger).toBe(true)
+      expect(wrapper.vm.showHamburger).toBe(false)
     })
   })
 
